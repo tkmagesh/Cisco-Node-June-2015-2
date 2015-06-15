@@ -1,0 +1,4 @@
+add,10
+subtract,20
+multiply,5
+divide,2
