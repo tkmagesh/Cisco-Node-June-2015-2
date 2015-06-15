@@ -5,6 +5,13 @@ var url = require('url');
 var qs = require('querystring');
 var calculator = require('./calculator');
 
+/*
+1. dataParser (url query)
+2. staticServer (.html)
+3. calculatorRoute ('/calculator')
+4. notFoundAction
+*/
+
 var staticResourceExtns = ['.html','.jpg','.css','.js','.png','.ico','.txt'];
 function isStaticResource(resourceName){
     var ext = path.extname(resourceName);
