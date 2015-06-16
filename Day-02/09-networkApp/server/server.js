@@ -11,24 +11,19 @@ var server = net.createServer(function(connection){
            filename : filename,
            type : 'watching'
        };
-       var msg = JSON.stringify(msgObj) + '\n';
+       var msg = JSON.stringify(msgObj);
        connection.write(msg);
-    var watcher = fs.watch(filename, function(){
+    var watcher = fs.watchFile(filename, function(){
        var msgObj = {
            filename : filename,
            type : 'changing',
            timestamp : new Date().toString()
        };
-       var msg = JSON.stringify(msgObj) + '\n';
-       var msgPart1 = msg.substr(0,20);
-       var msgPart2 = msg.substr(20);
-       connection.write(msgPart1);
-       setTimeout(function(){
-           connection.write(msgPart2);
-       }, 3000)
+       var msg = JSON.stringify(msgObj);
+        connection.write(msg);
     });
     connection.on('close', function(){
-        watcher.close();
+        //watcher.close();
     });
     connection.on('error', function(){
         console.log('connection error');
