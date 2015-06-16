@@ -1,6 +1,6 @@
 var calculator = require('./calculator');
 
-module.exports = function(req, res){
+module.exports = function(req, res, next){
     var resourceName = req.url.pathname;
     if (resourceName === "/calculator" && req.method === 'GET'){
         var operation = req.query.operation,
@@ -24,5 +24,7 @@ module.exports = function(req, res){
             res.write(result.toString());
             res.end();
         })
-    } */
+    } */ else {
+        next();
+    }
 };

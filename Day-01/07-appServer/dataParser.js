@@ -2,8 +2,9 @@
 var url = require('url');
 var qs = require('querystring');
 
-module.exports = function(req, res){
+module.exports = function(req, res, next){
     req.url = req.url === '/' ? '/index.html' : req.url;
     req.url = url.parse(req.url);
     req.query = qs.parse(req.url.query);
+    next();
 }
