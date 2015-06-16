@@ -38,4 +38,19 @@ router.get('/toggle/:taskId', function(req, res, next){
     res.redirect('/tasks');
 });
 
+router.get('/removeCompleted', function(req, res, next){
+    var completedTasks = taskList.filter(function(task){
+        return task.isCompleted;
+    });
+    res.render('tasks/confirmRemove',{list : completedTasks});
+});
+
+router.post('/removeCompleted', function(req, res, next){
+    for(var i=taskList.length-1; i >=0 ; i--){
+        if (taskList[i].isCompleted)
+            taskList.splice(i,1);
+    }
+    res.redirect('/tasks');
+});
+
 module.exports = router;

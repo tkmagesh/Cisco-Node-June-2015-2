@@ -1,0 +1,26 @@
+<style>
+    .completed {
+        color : red;
+        text-decoration: line-through;
+        font-style: italic;
+    }
+</style>
+<h1>Task Manager</h1>
+<ol>
+    {{#each list}}
+      <li>
+       {{#if this.isCompleted}}
+            <span class="completed">{{this.name}}</span>
+       {{else}}
+           <span>{{this.name}}</span>
+       {{/if}}
+           -
+           <a href="/tasks/toggle/{{this.id}}">X</a>
+       </li>
+    {{/each}}
+
+</ol>
+<form method='post'>
+    <input type="submit" value="Confim">
+    <a href="/tasks">Cancel</a>
+</form>
