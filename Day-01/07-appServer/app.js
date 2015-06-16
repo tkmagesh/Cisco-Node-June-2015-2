@@ -1,16 +1,16 @@
 var _middlewares = [];
 
 var app = function(req, res){
-   function action(req, res, middlewares){
+   function action(middlewares){
+        if (!middlewares || middlewares.length === 0) return;
         var first = middlewares[0];
-        var remaining = middlewares.splice(1);
+        var remaining = middlewares.slice(1);
         var next = function(){
-            action(req, res, remaining);
+            action(remaining);
         }
-        if (typeof first === "function")
-            first(req, res, next);
+        first(req, res, next);
     }
-    action(req, res, _middlewares);
+    action(_middlewares);
 };
 
 app.use = function(middleware){
